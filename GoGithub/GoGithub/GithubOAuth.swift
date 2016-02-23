@@ -20,6 +20,7 @@ enum GithubOAuthError: ErrorType {
     case MissingAccessToken(String)
     case ResponseFromGithub(String)
 }
+
 enum SaveOption {
     case Keychain
     case UserDefaults
@@ -53,9 +54,10 @@ class GithubOAuth
                     if let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String : AnyObject], token = self.accessTokenFrom(json) {
                         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                             switch options {
-                            case .Keychain: break
+                            case .Keychain: self.saveAccessTokenToKeychain(token)
                             case .UserDefaults: self.saveAccessTokenToUserDefault(token)
                             }
+                            completion(success: true)
                         })
                     }
                 } catch _ { completion(success: false) }
@@ -71,7 +73,6 @@ class GithubOAuth
         guard let token = accessToken else {
             throw GithubOAuthError.MissingAccessToken("You don't have an access token saved")
         }
-        
         return token
     }
     
@@ -114,7 +115,6 @@ class GithubOAuth
             (kSecAttrService as String) : query,
             (kSecAttrAccount as String) : query,
             (kSecAttrAccessible as String) : kSecAttrAccessibleAfterFirstUnlock]
-        
     }
     
     private func saveAccessTokenToKeychain(token: String) -> Bool

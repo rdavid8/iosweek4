@@ -38,6 +38,7 @@
                             <constraint firstItem="6a6-7Q-PDv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Z7g-HT-pu1"/>
                             <constraint firstItem="QMQ-d3-4j1" firstAttribute="centerX" secondItem="6a6-7Q-PDv" secondAttribute="centerX" id="ftr-eA-19M"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="QMQ-d3-4j1" secondAttribute="bottom" constant="20" id="hQm-Rp-l2H"/>
+                            <constraint firstItem="QMQ-d3-4j1" firstAttribute="top" secondItem="6a6-7Q-PDv" secondAttribute="bottom" constant="235" id="ng4-M0-qb5"/>
                         </constraints>
                     </view>
                 </viewController>

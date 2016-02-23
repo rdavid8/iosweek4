@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        GithubOAuth.shared.tokenRequestWithCallback(url, options: SaveOption.UserDefaults) { (success) in
+        
+        GithubOAuth.shared.tokenRequestWithCallback(url, options: SaveOption.Keychain) { (success) in
             if success {
                 print("We have the token")
             }
         }
+        print(url)
         return true
     }
 
